@@ -1,0 +1,678 @@
+@charset "utf-8";
+
+* {margin: 0; padding: 0; box-sizing: border-box;}
+ul{list-style: none;}
+a {text-decoration: none; color: inherit;}
+img { max-width:100%; vertical-align:middle }
+.inner { max-width:1170px; margin:0 auto; }
+.cf::after { content:''; display:block; clear:both }
+body { font-size:16px; color:#666; }
+
+
+#header { border-top: 5px solid #009223; transition:all 0.3s }
+#header.on {
+    position:fixed; width:100%; left:0; top:0; z-index:99999; background:#fff;
+}
+
+#header .inner { position:relative }
+#header .mobtop {display: none;}
+
+
+#header .pcmob .order {display: none;}
+#header .pcmob .closet {display: none;}
+#header .pcmob .meminfo {display: none;}
+
+.pcmob h1 {text-align: center ; padding:30px 0px; transition:all 0.3s }
+#header.on .pcmob h1 {
+    position:absolute; left:50px;
+    text-align: center ; padding:0px 0px;
+    top:50%; transform:translateY(-50%)
+}
+.membership { position:absolute; top:50px; right:0; 
+    color: #666666;
+    font-size: 13px; transition:all 0.3s
+}
+#header.on .membership { right:50px; top:50%; 
+    transform:translateY(-50%)
+}
+.membership a { padding:0 15px;
+    /* 높이가 다른 인라인요소들을 중간선에 맞추기 위한 속성 */
+    vertical-align:middle; 
+}
+.membership a:last-child { 
+    /* padding:0 0 0 5px; */
+    padding-left:5px;
+    padding-right:0px;
+ }
+.membership a:nth-child(2) { position:relative }
+.membership a:nth-child(2)::after {
+    content:''; 
+    position:absolute; top:50%; 
+    left:-3px; 
+    width:3px; height:3px; background:#ddd; 
+    margin-top:-1.5px;
+}
+
+
+/* 1단계 메뉴 */
+#nav .depth1 > li{
+    /* display: inline-block; */
+    float:left; 
+    text-align: center;
+    width:16.6666%;
+    border:0px solid #000; 
+    position:relative;
+}
+#nav .depth1 > li > a{
+    display: block; 
+    font-size: 18px;
+    color: #292929;
+    font-weight: bold;
+    letter-spacing: -0.72px;  
+    padding: 30px 0px; 
+}
+#nav .depth1 > li:hover > a {
+    color:#009223;
+}
+
+
+/* 2단계 메뉴 */
+#nav .depth2 {
+    position:absolute;
+    top:100%; width:100%; height:0px; opacity:0;
+    /* overflow:hidden : 아래의 삼각형 때문에 잠시 주석처리함 */
+    left:0; border:0px solid #000; 
+    background:#fff; padding:20px 0px; 
+    /* display:none;  */
+    z-index:99; font-size:15px; 
+    color:#666; border-top:1px solid #e5e5e5;
+    transition:all 0.3s;
+}
+#nav .depth1 > li .depth2::after { 
+     transition:all 0.5s; opacity:0;
+     content:'';
+    width:0; height:0;
+    border:8px solid #009223;
+    border-top:none;
+    border-left-color:transparent;
+    border-right-color:transparent;
+    position:absolute; top:-9px; left:50%; margin-left:-8px;
+    z-index:99999999;
+}
+#nav .depth1 > li:hover .depth2::after {
+    opacity:1
+}
+
+#nav .depth1:hover > li > .depth2 {
+    display:block; 
+    height:244px; opacity:1;
+}
+#nav .depth2 > li {
+    line-height:2.3em;
+}
+#nav .depth2 > li:hover {
+    text-decoration:underline;
+    color:#009223;
+}
+
+#nav { position:relative }
+#nav .bgbox {
+    width:100%; height:0px;
+    background:#fff;
+    border-top:1px solid #e5e5e5;
+    position:absolute;
+    top:100%; z-index:98;
+    /* display:none; */
+    transition:all 0.3s
+}
+#nav .depth1:hover + .bgbox {
+    /* display:block;  */
+    height:244px;
+}
+
+#header.on .scrolling-bar {
+    position:absolute; bottom:0; 
+    width:0%; left:0; background-color:red;
+    height:3px; 
+}
+
+
+@media screen and (max-width:1600px) {
+    #header.on .pcmob h1 { left:20px }
+    #header.on .membership { right:20px }
+    #header.on  #nav .inner {
+        max-width:800px;  
+    } 
+    #header.on  #nav .depth2 {
+        font-size:12px;
+    }
+}
+
+@media screen and (max-width:1250px) {
+    #header.on .pcmob h1 img { width:150px }
+
+    #header.on  #nav .inner {
+        max-width:650px;  
+    } 
+    #header.on  #nav .depth2 {
+        font-size:10px;
+    }
+}
+
+
+
+@media screen and (max-width:800px) {
+    #header .pcmob {display: block; 
+        position: fixed; width: 95%; height: 100%;
+        background-color: #e5e5e5; top: 0; left: -95%; z-index: 99999;
+        transition: all 0.5s; overflow-y: auto;
+    }
+    #header .pcmob.on {left: 0; z-index: 9999999;}
+    #header .mobtop {display: block; position: relative;}
+    #header .mobtop h1 {text-align: center; padding: 10px 0 20px;}
+    #header .mobtop h1 img {width: 150px;}
+    #header .ham {position: absolute; top: 50%; left: 20px;
+        transform: translateY(-50%); z-index: 9999;
+    }
+
+    #header .inner { position:relative; }
+    #header .pcmob .order {display: block;
+        background-color: #fff; padding: 20px;
+        color: #000; position: absolute; 
+        top: 240px; left: 20px; right: 20px;
+        border-radius: 30px 0 30px 0;
+    }
+    #header .pcmob .closet {display: block; position: absolute;
+    top: 20px; right: 20px; color: #fff;}
+    #header .pcmob .meminfo {display: block; color: #fff;
+    padding: 30px 0; font-weight: 20px;}
+    
+    #header .topmenu {background-color: green; 
+    padding: 20px 20px 100px}
+
+    .pcmob h1 {text-align: left ; padding: 0px; transition:all 0.3s }
+    .pcmob h1 img {width:100px}
+    #header.on .pcmob h1 {
+        position:static; left:50px;
+        text-align: left ; padding:0px 0px;
+        top:50%; transform:translateY(0%)
+    }
+    .membership { position:static; top:50px; right:0; 
+        color: #666666;
+        font-size: 13px; transition:all 0.3s;
+        text-align: center;
+    }
+    #header.on .membership { right:50px; top:50%; 
+        transform:translateY(0%); position: static;
+    }
+    .membership a { padding:0px;
+        /* 높이가 다른 인라인요소들을 중간선에 맞추기 위한 속성 */
+        vertical-align:middle; display: inline-block;
+        background-color: #ffc300; color: #fff;
+        border-radius: 50px;
+        width: 45%; height: 40px;
+        text-align: center; line-height: 40px;
+        font-size: 18px; font-weight: bold;
+    }
+    .membership a:last-child { 
+        /* padding:0 0 0 5px; */
+        padding-left:5px;
+        padding-right:0px;
+        display: none;
+     }
+    .membership a:nth-child(2) { position:relative; background-color: #fff; color: #000;}
+    .membership a:nth-child(2)::after {
+        content:''; 
+        position:absolute; top:50%; 
+        left:-3px; 
+        width:3px; height:3px; background:#ddd; 
+        margin-top:-1.5px; display: none;
+    }
+    
+    
+    /* 1단계 메뉴 */
+    #nav { background-color:#fff;  border-radius:30px 0 30px 0;
+    margin: 120px 20px 0}
+    #nav .depth1 > li{
+        /* display: inline-block; */
+        float:none; 
+        text-align: left;
+        width:100%;
+        border-bottom:1px solid #000; 
+        position:relative;
+    }
+    #nav .depth1 > li:last-child { border: none;}
+    #nav .depth1 > li > a{
+        display: block; 
+        font-size: 18px;
+        color: #292929;
+        font-weight: bold;
+        letter-spacing: -0.72px;  
+        padding: 20px 30px 20px 50px; 
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 25px auto;
+        position: relative;
+    }
+    #nav .depth1 > li > a::after {
+        content: '';
+        width: 24px;
+        height: 16px;
+        background-image: url(../images/icon_gnb_arr.png);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        position: absolute; top: 25px; right: 25px;
+    }
+    #nav .depth1 > li > a.on::after {
+        background-position: 0 -16px;
+    }
+
+    #nav .depth1 > li:hover > a {
+        color:#000;
+    }
+
+    #nav .depth1 > li:nth-child(1) > a {background-image: url(../images/icon_app_gnb_howto.png)}
+    #nav .depth1 > li:nth-child(2) > a {background-image: url(../images/icon_app_gnb_howto.png)}
+    #nav .depth1 > li:nth-child(3) > a {background-image: url(../images/icon_app_gnb_howto.png)}
+    #nav .depth1 > li:nth-child(4) > a {background-image: url(../images/icon_app_gnb_howto.png)}
+    #nav .depth1 > li:nth-child(5) > a {background-image: url(../images/icon_app_gnb_howto.png)}
+    #nav .depth1 > li:nth-child(6) > a {background-image: url(../images/icon_app_gnb_howto.png)}
+    
+    
+    /* 2단계 메뉴 */
+    #nav .depth2 {
+        position:static; /* static값은 left,right,bottom,top값을 무시함 */
+        top:100%; width:100%; height:auto; opacity:1;
+        /* overflow:hidden : 아래의 삼각형 때문에 잠시 주석처리함 */
+        left:0; border:0px solid #000; 
+        background:#fff; padding:20px 20px; 
+        /* display:none;  */
+        z-index:99; font-size:15px; 
+        color:#666; border-top:1px solid #e5e5e5;
+        transition:all 0s;
+        display: none;
+    }
+    #nav .depth1 > li .depth2::after { 
+        display: none;
+    }
+    #nav .depth1 > li:hover .depth2::after {
+        display: none;
+    }
+    
+    #nav .depth1:hover > li > .depth2 {
+        display: none;
+        height: auto; opacity: 1;
+    }
+    #nav .depth2 > li {
+        line-height:2.3em;
+    }
+    #nav .depth2 > li:hover {
+        text-decoration:none;
+        color:#009223;
+    }
+    
+    #nav { position:relative }
+    #nav .bgbox {
+        display:none;
+    }
+    #nav .depth1:hover + .bgbox {
+        display:none; 
+    }
+    
+    #header.on .scrolling-bar {
+        display: none;
+    }
+}
+
+
+/* 슬라이드 */
+#main .slideOuter {
+    /* height:436.09px;
+    overflow:hidden */
+}
+.slideInner { position:relative }
+.slideInner .slick-dots {
+    position:absolute; bottom:50px;
+    width:585px; 
+    text-align:right; left:50%;
+}
+.slideInner .slick-dots li {
+    display:inline-block; 
+    margin:0 5px;
+}
+.slideInner .slick-dots li button {
+    width:10px; height:10px;
+    border-radius:50px;
+    border:none;
+    background-color:#fff;
+    color:#fff;
+    font-size:1px; 
+}
+.slideInner .slick-dots li.slick-active button {
+    width:30px; 
+    background-color:#ffc300;
+    color:#ffc300;
+}
+
+.slideInner .slide img { transform:scale(1); transition:all 2s 0.6s;  }
+.slideInner .slide.slick-active img { transform:scale(1.2) }
+
+
+/* 매장찾기, 가맹신청문의 */
+#main .store { position:relative; height:80px }
+#main .storeinfo { position:absolute;
+    top:-30px; right:0; 
+}
+#main .storeinfo > div {
+    width:300px; float:left;   
+}
+#main .storeinfo > div:first-child {
+    background-color:#ffce32; color:#000;
+    border-radius:30px 0 0 0;
+}    
+#main .storeinfo > div:last-child {
+    background-color:#009223; color:#fff;
+    border-radius:0 0 30px 0;
+}  
+#main .storeinfo > div > a { display:block; 
+    height:80px; text-align:center; font-size:22px; 
+    line-height:80px;
+    letter-spacing:-2px;
+}
+
+
+/* 서브웨이 메뉴 */
+#main .subwaymenu { padding-top:40px }
+#main .subwaymenu > div { position:relative; max-width:1230px; margin:0 auto;
+overflow:hidden; }
+#main .subwaymenu h2 { 
+    font-size:40px; height:60px;
+    background-image:url(../images/bul_tit.png);
+    background-repeat: no-repeat;
+    padding-left:25px; 
+    color:#000;
+}
+#main .subwaymenu .title {
+    position:absolute; right:0;
+    top:20px; 
+}
+#main .subwaymenu .title li { float:left; 
+    padding:0 20px;  font-weight:bold; 
+    cursor:pointer; position:relative;
+}
+#main .subwaymenu .title li.active {
+    color:#009223
+}
+
+#main .subwaymenu .title li:last-child {  
+    padding-right:0;  
+}
+#main .subwaymenu .title li::after {
+    content:'';
+    width:1px; height:13px; background-color:#ddd;
+    position:absolute; top:5px; right:0; 
+}
+#main .subwaymenu .title li:last-child::after {
+    display:none }
+
+#main .subwaymenu .content { padding:30px 0 50px; 
+    width:400%; overflow:hidden
+}
+#main .subwaymenu .content > div {
+    width:25%; float:left; 
+}
+
+#main .subwaymenu .content ul { overflow:hidden }
+#main .subwaymenu .content li {
+    width:25%; float:left; padding:20px 15px; 
+    text-align:center; position:relative; 
+    overflow:hidden; 
+}    
+#main .subwaymenu .content li img { transition:all 0.5s }
+#main .subwaymenu .content li strong {
+    font-size:18px;
+    color:#292929;
+    transition:all 0.5s;
+}
+#main .subwaymenu .content li p {
+    font-size:13px;
+    color:#999;
+    padding:15px 30px 0;
+    transition:all 0.5s;
+    word-break:keep-all
+}
+
+
+
+#main .subwaymenu .content li:hover p {
+    opacity:0; 
+}
+#main .subwaymenu .content li:hover strong {
+    display:inline-block;
+    transform:scale(1.5) translateY(15px)
+}
+#main .subwaymenu .content li:hover img {
+   transform:scale(1.25)
+}
+#main .subwaymenu .content li a::after {
+    content:'';
+    width:98px; height:98px;
+    background-image:url(../images/btn_more.png);
+    background-repeat:no-repeat;
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%, -50%);
+    opacity:0; transition:all 0.5s;
+}
+#main .subwaymenu .content li:hover a::after { 
+    opacity:1
+}
+
+
+/* 써브웨이 히스토리 */
+#main .introduce {
+    background-image:url(../images/bg_content.gif);
+    padding:80px 0; 
+}
+#main .introduce .kim {
+    float:left; 
+    background-repeat:no-repeat;
+}
+#main .introduce .one { 
+    width:33%;  position:relative
+}
+#main .introduce .two { 
+    width:67%; position:relative
+}
+#main .introduce .three { 
+    width:70%; overflow:hidden;
+    background-color:#fff; 
+    height:292.5px; margin-top:30px; 
+    border-radius:35px 0 35px 0; 
+    padding:70px; 
+}
+#main .introduce .three .what {
+    width:45%; float:left; padding-right:100px; 
+}
+#main .introduce .three .what h2 {
+    font-size:30px; color:#292929;
+    background-image:url(../images/bul_tit.png);
+    background-repeat:no-repeat;
+    height:60px; padding:15px 0 0 23px;
+}
+#main .introduce .three .what p {
+    /* font-size:16px; color:#666; */
+    text-align:center;
+    letter-spacing:-1px; padding:15px; 
+}
+
+#main .introduce .three .news {
+    width:55%; float:left
+}
+#main .introduce .three .news li {
+    color:#292929;
+    line-height:2.2em;
+    letter-spacing:-1px; 
+}
+#main .introduce .three .news li > a:hover { 
+    color:#009223;
+}
+#main .introduce .three .news li > a {
+    position:relative; 
+}
+#main .introduce .three .news li > a::after {
+    content:'';
+    width:0%; height:1px; background-color:#009223;
+    position:absolute; left:0; bottom:0; 
+    transition:all 0.5s;
+}
+#main .introduce .three .news li > a:hover::after { 
+    width:100%; 
+}
+
+
+#main .introduce .three .news > a {
+    font-size:14px;
+    color:#999;
+    display:inline-block; padding-top:20px; 
+}
+
+
+#main .introduce .four { 
+    width:22.5%; margin:30px 5% 0 2.5%;
+    /* border-radius:0 30px 0 30px; 
+    overflow:hidden; */
+}
+#main .introduce .four img {
+    border-radius:0 35px 0 35px; 
+}
+
+
+#main .introduce .kim .tit {
+    font-size:28px; font-weight:bold;
+    line-height:40px;
+    letter-spacing:-2px; color:#fff;
+    position:absolute; top:38px; left:38px;
+}
+#main .introduce .two .tit { 
+    left:390px;
+}
+#main .introduce .kim .btn {
+    color:#fff; 
+    position:absolute; bottom:38px; left:38px;
+    border:2px solid #fff; 
+    display:inline-block;
+    padding:10px 20px; 
+    border-radius:50px;
+    font-weight:bold;
+}
+#main .introduce .kim .btn:hover {
+    background-color:rgba(0,0,0,0.5)
+}
+#main .introduce .two .btn { 
+    left:390px;
+}
+
+
+
+/* 써브웨이 안내 */
+#main .about .inner { overflow:hidden;
+    padding:40px 0px; text-align:center;
+}
+#main .about li {
+    /* float:left; width:25%; */
+    display:inline-block; padding:0 20px; 
+}
+#main .about li:last-child {
+    padding-right:80px;
+ }
+#main .about li .icon {
+    width:70px; height:70px;
+    background-image:url(../images/icon_quickmenu.png);
+    display:inline-block;
+    vertical-align:middle; margin-right:10px; 
+}
+#main .about li .text {
+    display:inline-block; text-align:left;
+    vertical-align:middle
+}
+#main .about li .text strong {
+    font-size:18px;
+    color:#292929
+ }
+ #main .about li .text p {
+     font-size:13px;
+     color:#999; margin-top:6px;
+     letter-spacing:-1px; 
+ }
+
+
+#main .about li:first-child .icon {
+    background-position:0 0;
+}
+#main .about li:nth-child(2) .icon {
+    background-position:-70px 0;
+}
+#main .about li:nth-child(3) .icon {
+    background-position:-140px 0;
+}
+#main .about li:last-child .icon {
+    background-position:-210px 0;
+}
+
+
+/* 하단구역 */
+#footer {
+    background:#292929; font-size:14px;
+    letter-spacing:-1px; 
+}
+#footer .bottommenu {
+    border-bottom:1px solid #3b3b3b; 
+    padding:22px 0; 
+}
+#footer .bottommenu a { padding-right:30px }
+#footer .bottommenu strong { color:#bbb }
+#footer .info { 
+    padding:22px 0; position:relative; 
+}
+#footer .info > div:first-child {
+    margin-bottom:7px 
+}
+#footer .info .sns {
+    position:absolute; top:50%; transform:translateY(-50%);
+    right:0; 
+}
+#footer .info .sns > div {
+    width:50px; height:50px; display:inline-block;
+    /* border:1px solid #fff;  */
+    margin:0 7px; 
+}
+#footer .info .sns > div:first-child {
+    background-image:url(../images/icon_sns_instar.png);
+}
+#footer .info .sns > div:last-child {
+    background-image:url(../images/icon_sns_facebook.png);
+}
+
+#footer .info .sns > div:hover {
+    background-position:-50px 0; 
+}
+
+#footer .info > div:first-child span {
+    padding:0 7px; position:relative;
+}
+#footer .info > div:first-child span.addr {
+    padding-left:0
+}
+#footer .info > div:first-child span::after { 
+    content:'';
+    position: absolute;
+    left: -2px;
+    top: 5px;
+    width: 2px;
+    height: 10px;
+    background-color: #666666;
+}
+#footer .info > div:first-child span.addr::after { 
+    display:none
+}

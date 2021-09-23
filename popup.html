@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <style>
+        
+.popup {
+    background-color: #ffc20d;
+    padding: 20px;
+    color: #000;
+}
+
+.popup img {
+    width: 100%;
+}
+
+.popup div {
+    margin-top: 5px;
+    position: relative
+}
+
+.popup div a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 3px 5px;
+    text-decoration: none;
+    border-radius: 3px; font-size: 12px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="popup">
+        <img src="./images/popup.png" alt="">
+        <div>
+            <input type="checkbox" id="chk">오늘 하루 그만 보기
+            <a href="javascript:;" id="close">닫기</a>
+        </div>
+    </div>
+
+    <script>
+        var close = document.querySelector('#close')
+        var chk = document.querySelector('#chk')
+        close.addEventListner('click', function(){
+            if (chk.checked) {
+                var d = new Date()
+                d.setTime(d.getTime()+(24*60*60*1000))
+                var expires = "expires="+d.toUTCString()
+                document.cookie = "popupYN=Y;"+expires
+            } else {
+                document.cookie = "popupYN=N"
+            }
+            window.close()
+        })
+    </script>
+    
+</body>
+</html>

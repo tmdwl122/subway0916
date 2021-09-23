@@ -8,6 +8,36 @@ img { max-width:100%; vertical-align:middle }
 .cf::after { content:''; display:block; clear:both }
 body { font-size:16px; color:#666; }
 
+.introAni {
+    position:fixed;
+    width: 100%;
+    top:0; left:0; bottom:0;
+    background:#000;
+    font-size:100px; color:#fff; z-index:9999999;
+    display: flex; flex-direction: column;
+    align-items: center;  justify-content: center;
+}
+
+.popup {
+    position: fixed;
+    left: 100px;
+    top: 100px;
+    z-index:999999;
+    background-color: #ffc20d;
+    padding: 20px;
+    color: #000;
+}
+
+.popup div {
+    margin-top: 5px;
+    position: relative
+}
+
+.popup div a {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 #header { border-top: 5px solid #009223; transition:all 0.3s }
 #header.on {
@@ -162,12 +192,22 @@ body { font-size:16px; color:#666; }
 
 
 @media screen and (max-width:800px) {
-    #header .pcmob {display: block; 
-        position: fixed; width: 95%; height: 100%;
-        background-color: #e5e5e5; top: 0; left: -95%; z-index: 99999;
+    #header.on #nav .depth2 {
+        font-size: 15px;
+    }
+    #header .pcmobcover {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 99999;
+        display: none;
+    }
+    #header .pcmob { 
+        position: absolute; width: 95%; height: 100%;
+        background-color: #e5e5e5; top: 0; left: -95%; 
         transition: all 0.5s; overflow-y: auto;
     }
-    #header .pcmob.on {left: 0; z-index: 9999999;}
+    #header .pcmob.on {left: 0;}
     #header .mobtop {display: block; position: relative;}
     #header .mobtop h1 {text-align: center; padding: 10px 0 20px;}
     #header .mobtop h1 img {width: 150px;}

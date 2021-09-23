@@ -25,11 +25,13 @@ function init() {
         $('.depth2').css({
             display:'block'
         })
+        $('#header .pcmobcover').show()
     } else {
         $('html').addClass('mobile').removeClass('pc')
         $('.depth2').css({
             display:'none'
         })
+        $('#header .pcmobcover').hide()
     }
 }
 
@@ -40,6 +42,64 @@ $(window).on('resize', function(){
     init()
 })
 // 여기까지 화면사이즈별 액션을 구분하기 위한 프로그램
+
+
+// 로딩 이미지 설정하기
+$(window).on('load', function(){
+    var i = 0;
+    var timer = setInterval(add, 25)
+
+    function add(){
+        i++
+        if (i>=100) {
+            clearInterval(timer)
+            // $('.introAni').fadeOut()
+            $('.introAni').animate({
+                left:'-100%'
+            },500, function(){
+                $(this).hide()
+            })
+        }
+        $('.introAni div').eq(1).text(i+'%')
+    }
+
+
+    // "popupYN=Y", "popupYN=N"
+    // 레이어팝업(오늘하루 그만보기)
+     // null은 처음 사이트 방문할때 값
+    // var cookie = document.cookie
+    // console.log(cookie)
+    // if (cookie != "" && cookie === "popupYN=Y") {
+    //     $('.popup').hide()
+    // } else {
+    //     $('.popup').show()
+    // }
+
+
+    // 윈도우 팝업 (오늘하루 그만보기)
+    var cookie = document.cookie
+    if (cookie === "" || cookie === "popupYN=N") {
+        //   window.open('문서경로','창이름','옵션(창크기, 창위치')
+        window.open('./popup.html','','width=500, height=680, top=100, left=100, scropllbars=no, resizable=no')
+        } 
+})
+
+
+// 레이어팝업 오늘하루 그만보기(닫기)
+// $('.popup a').on('click', function(){
+//     if ($(this).prev().prop('checked')) {
+//         var d = new Date()
+//         d.setTime(d.getTime()+(24*60*60*1000)) // 시간만 +24시간으로 수정함
+//         var expires = "expires="+d.toUTCString() // 쿠키는 문자만 되기 때문에 d를 문자값으로 바꿈
+//         document.cookie = "popupYN=Y;"+expires
+//     } else {
+//         document.cookie = "popupYN=N"
+//     }
+
+//     $('.popup').hide()
+    
+// })
+
 
 
 var $subLi = $('.subwaymenu .title li')
@@ -101,27 +161,18 @@ $('.mobtop .ham').on('click',function(){
     $('html,body').css({
         overflowY:'hidden'
     })
-    $('body').append('<div class="pcmobcover"></div>')
-    $('.pcmobcover').css({
-        position:'absolute',
-        left:0,
-        right:0,
-        top:0,
-        bottom:0,
-        backgroundColor:'rgba(0,0,0,0.0)',
-        zIndex:'9999'
-    }).animate({
-        backgroundColor:'rgba(0,0,0,0.7)'
-    },500)
+    $('#header .pcmobcover').fadeIn(300)
     $('#header .pcmob').addClass('on')
 })
 
-$('#header .pcmob .closet a:last').on('click', function(){
+$('#header .pcmob .closet:last').on('click', function(){
+    $('#header .pcmobcover').fadeOut(300)
     $('#header .pcmob').removeClass('on')
-    $('.pcmobcover').remove()
     $('html,body').css({
         overflowY:'auto'
     })
+    $('.depth1 > li > a').removeClass('on')
+    $('.depth2').slideUp()
 })
 
 
@@ -137,4 +188,7 @@ $('.depth1 > li > a').on('click', function(){
     }
    
 })
+
+
+
 
